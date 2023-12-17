@@ -1,4 +1,3 @@
-// include openlayer
 var mapView = new ol.View ({
     center: ol.proj.fromLonLat([97.140120, 5.146124]),
     zoom: 15,
@@ -8,24 +7,24 @@ var map = new ol.Map ({
     target: 'map',
     view: mapView,
 });
-// include openlayer
 
-// OSM layer
+var nonTile = new ol.layer.Tile ({
+    title: 'None',
+    type: 'base',
+    visible: false
+});
+
 var osmFile = new ol.layer.Tile ({
     title: 'Open Street Map',
-    visible: true,
+    visible: false,
     source: new ol.source.OSM(),
 });
 
-map.addLayer(osmFile);
-// OSM layer
-
-// Google Satellite layer
 var googleSatLayer = new ol.layer.Tile({
     title: 'Google Satellite',
     visible: true,
     source: new ol.source.XYZ({
-        url: 'https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', // Ganti dengan subdomain yang valid
+        url: 'https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
         maxZoom: 20,
         tilePixelRatio: 1,
         tileSize: 256,
@@ -33,10 +32,13 @@ var googleSatLayer = new ol.layer.Tile({
     }),
 });
 
-map.addLayer(googleSatLayer);
-// Google Satellite layer
+var baseGroup = new ol.layer.Group ({
+    title: 'Base Maps',
+    layers: [nonTile, osmFile, googleSatLayer]
+});
 
-// Call API Polygon/Polyline to Web
+map.addLayer(baseGroup);
+
 var createLayer = function(title, layerName) {
     return new ol.layer.Tile({
         title: title,
@@ -49,68 +51,84 @@ var createLayer = function(title, layerName) {
     });
 };
 
-var layers = [
-    createLayer('Batas Gampong Meunasah Manyang', 'bts_gmpg_mns_manyang'),
-    createLayer('Jalan', 'jalan'),
-    createLayer('Balai Pengajian', 'balai_pengajian'),
-    createLayer('Point Balai Pengajian', 'balaipengajianpoint'),
-    createLayer('Bengkel', 'bengkel'),
-    createLayer('Point Bengkel', 'bengkelpoint'),
-    createLayer('Got', 'got'),
-    createLayer('Gudang', 'gudang'),
-    createLayer('Point Gudang', 'gudangpoint'),
-    createLayer('Jurong', 'jurong'),
-    createLayer('Kandang', 'kandang'),
-    createLayer('Point Kandang', 'kandangpoint'),
-    createLayer('Kebun', 'kebun'),
-    createLayer('Point Kebun', 'kebunpoint'),
-    createLayer('Kedai', 'kedai'),
-    createLayer('Point Kedai', 'kedaipoint'),
-    createLayer('Kesehatan', 'kesehatan'),
-    createLayer('Point Kesehatan', 'kesehatanpoint'),
-    createLayer('Kios', 'kios'),
-    createLayer('PointKios', 'kiospoint'),
-    createLayer('Lahan Kosong', 'lahan_kosong'),
-    createLayer('Point Lahan Kosong', 'lahankosongpoint'),
-    createLayer('Lapangan', 'lapangan'),
-    createLayer('Point Lapangan', 'lapanganpoint'),
-    createLayer('Lueng', 'lueng'),
-    createLayer('Masjid', 'masjid'),
-    createLayer('Point Masjid', 'masjidpoint'),
-    createLayer('Meunasah', 'meunasah'),
-    createLayer('Point Meunasah', 'meunasahpoint'),
-    createLayer('Pemakaman', 'pemakaman'),
-    createLayer('Point Pemakaman', 'pemakamanpoint'),
-    createLayer('Pemerintahan', 'pemerintahan'),
-    createLayer('Point Pemerintahan', 'pemerintahanpoint'),
-    createLayer('Pendidikan', 'pendidikan'),
-    createLayer('Point Pendidikan', 'pendidikanpoint'),
-    createLayer('Pos Jaga', 'pos_jaga'),
-    createLayer('Point Pos Jaga', 'pos_jagapoint'),
-    createLayer('Rawa Rawa', 'rawa_rawa'),
-    createLayer('Point Rawa Rawa', 'rawarawapoint'),
-    createLayer('Rumah', 'rumah'),
-    createLayer('Point Rumah', 'rumahpoint'),
-    createLayer('Rumah Sendiri', 'rumah_sendiri'),
-    createLayer('Point Rumah Sendiri', 'rumahsendiripoint'),
-    createLayer('Sawah', 'sawah'),
-    createLayer('Point Sawah', 'sawahpoint'),
-    createLayer('Rangkang', 'rangkang'),
-    createLayer('Point Rangkang', 'rangkangpoint'),
-    createLayer('Tambak', 'tambak'),
-    createLayer('Point Tambak', 'tambakpoint'),
-    createLayer('Toko', 'toko'),
-    createLayer('Point Toko', 'tokopoint'),
-    createLayer('Usaha', 'usaha'),
-    createLayer('Point Usaha', 'usahapoint')
-];
-
-layers.forEach(function(layer) {
-    map.addLayer(layer);
+var polygonGroup = new ol.layer.Group({
+    title: 'Polygon',
+    layers: [
+        createLayer('Batas Gampong Meunasah Manyang', 'bts_gmpg_mns_manyang'),
+        createLayer('Balai Pengajian', 'balai_pengajian'),
+        createLayer('Bengkel', 'bengkel'),
+        createLayer('Gudang', 'gudang'),
+        createLayer('Kandang', 'kandang'),
+        createLayer('Kebun', 'kebun'),
+        createLayer('Kedai', 'kedai'),
+        createLayer('Point Kedai', 'kedaipoint'),
+        createLayer('Kesehatan', 'kesehatan'),
+        createLayer('Kios', 'kios'),
+        createLayer('Lahan Kosong', 'lahan_kosong'),
+        createLayer('Lapangan', 'lapangan'),
+        createLayer('Masjid', 'masjid'),
+        createLayer('Meunasah', 'meunasah'),
+        createLayer('Pemakaman', 'pemakaman'),
+        createLayer('Pemerintahan', 'pemerintahan'),
+        createLayer('Pendidikan', 'pendidikan'),
+        createLayer('Pos Jaga', 'pos_jaga'),
+        createLayer('Rawa Rawa', 'rawa_rawa'),
+        createLayer('Rumah', 'rumah'),
+        createLayer('Rumah Sendiri', 'rumah_sendiri'),
+        createLayer('Sawah', 'sawah'),
+        createLayer('Rangkang', 'rangkang'),
+        createLayer('Tambak', 'tambak'),
+        createLayer('Toko', 'toko'),
+        createLayer('Usaha', 'usaha'),
+    ],
 });
-// Call API Polygon/Polyline to Web
 
-// Create popup to switch layer
+map.addLayer(polygonGroup);
+
+var polylineGroup = new ol.layer.Group({
+    title: 'Polyline',
+    layers: [
+        createLayer('Jalan', 'jalan'),
+        createLayer('Got', 'got'),
+        createLayer('Jurong', 'jurong'),
+        createLayer('Lueng', 'lueng'),
+    ],
+});
+
+map.addLayer(polylineGroup);
+
+var pointGroup = new ol.layer.Group({
+    title: 'Polyline',
+    layers: [
+        createLayer('Point Balai Pengajian', 'balaipengajianpoint'),
+        createLayer('Point Bengkel', 'bengkelpoint'),
+        createLayer('Point Gudang', 'gudangpoint'),
+        createLayer('Point Kandang', 'kandangpoint'),
+        createLayer('Point Kebun', 'kebunpoint'),
+        createLayer('Point Kedai', 'kedaipoint'),
+        createLayer('Point Kesehatan', 'kesehatanpoint'),
+        createLayer('PointKios', 'kiospoint'),
+        createLayer('Point Lahan Kosong', 'lahankosongpoint'),
+        createLayer('Point Lapangan', 'lapanganpoint'),
+        createLayer('Point Masjid', 'masjidpoint'),
+        createLayer('Point Meunasah', 'meunasahpoint'),
+        createLayer('Point Pemakaman', 'pemakamanpoint'),
+        createLayer('Point Pemerintahan', 'pemerintahanpoint'),
+        createLayer('Point Pendidikan', 'pendidikanpoint'),
+        createLayer('Point Pos Jaga', 'pos_jagapoint'),
+        createLayer('Point Rawa Rawa', 'rawarawapoint'),
+        createLayer('Point Rumah', 'rumahpoint'),
+        createLayer('Point Rumah Sendiri', 'rumahsendiripoint'),
+        createLayer('Point Sawah', 'sawahpoint'),
+        createLayer('Point Rangkang', 'rangkangpoint'),
+        createLayer('Point Tambak', 'tambakpoint'),
+        createLayer('Point Toko', 'tokopoint'),
+        createLayer('Point Usaha', 'usahapoint')
+    ],
+});
+
+map.addLayer(pointGroup);
+
 var layerSwitcher = new ol.control.LayerSwitcher({
     activationMode: 'click',
     startActive: false,
@@ -118,9 +136,7 @@ var layerSwitcher = new ol.control.LayerSwitcher({
 });
 
 map.addControl(layerSwitcher);
-// Create popup to switch layer
 
-// Create popup Info layer
 var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
@@ -140,9 +156,7 @@ closer.onclick = function () {
     closer.blur();
     return false;
 };
-// Create popup Info layer
 
-// Function to handle common logic for creating and displaying popup layers
 function handlePopupLayer(layerName, featureInfoProperties, extraProperties = {}) {
     map.on('singleclick', function (evt) {
         content.innerHTML = '';
@@ -166,7 +180,6 @@ function handlePopupLayer(layerName, featureInfoProperties, extraProperties = {}
         }
     });
 }
-// Function to handle common logic for creating and displaying popup layers
 
 // Call Action popup layer Rumah Sendiri
 handlePopupLayer('Rumah Sendiri', 'nama');
