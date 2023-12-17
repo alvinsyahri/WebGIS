@@ -8,7 +8,9 @@ var map = new ol.Map ({
     target: 'map',
     view: mapView,
 });
+// include openlayer
 
+// OSM layer
 var osmFile = new ol.layer.Tile ({
     title: 'Open Street Map',
     visible: true,
@@ -16,7 +18,23 @@ var osmFile = new ol.layer.Tile ({
 });
 
 map.addLayer(osmFile);
-// include openlayer
+// OSM layer
+
+// Google Satellite layer
+var googleSatLayer = new ol.layer.Tile({
+    title: 'Google Satellite',
+    visible: true,
+    source: new ol.source.XYZ({
+        url: 'https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', // Ganti dengan subdomain yang valid
+        maxZoom: 20,
+        tilePixelRatio: 1,
+        tileSize: 256,
+        projection: 'EPSG:3857',
+    }),
+});
+
+map.addLayer(googleSatLayer);
+// Google Satellite layer
 
 // Call API Polygon/Polyline to Web
 var createLayer = function(title, layerName) {
@@ -32,7 +50,7 @@ var createLayer = function(title, layerName) {
 };
 
 var layers = [
-    createLayer('Batas Gampong Meunasah Manyang', 'Bts_Gmpg_Mns_Manyang'),
+    createLayer('Batas Gampong Meunasah Manyang', 'bts_gmpg_mns_manyang'),
     createLayer('Jalan', 'jalan'),
     createLayer('Balai Pengajian', 'balai_pengajian'),
     createLayer('Point Balai Pengajian', 'balaipengajianpoint'),
