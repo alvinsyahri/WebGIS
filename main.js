@@ -1,3 +1,4 @@
+// Inisialisasi OpenLayer
 var mapView = new ol.View ({
     center: ol.proj.fromLonLat([97.140120, 5.146124]),
     zoom: 15,
@@ -7,7 +8,9 @@ var map = new ol.Map ({
     target: 'map',
     view: mapView,
 });
+// Inisialisasi OpenLayer
 
+//Inisialisasi Layer Maps
 var nonTile = new ol.layer.Tile ({
     title: 'None',
     type: 'base',
@@ -16,12 +19,14 @@ var nonTile = new ol.layer.Tile ({
 
 var osmFile = new ol.layer.Tile ({
     title: 'Open Street Map',
+    type: 'base',
     visible: false,
     source: new ol.source.OSM(),
 });
 
 var googleSatLayer = new ol.layer.Tile({
     title: 'Google Satellite',
+    type: 'base',
     visible: true,
     source: new ol.source.XYZ({
         url: 'https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
@@ -38,7 +43,9 @@ var baseGroup = new ol.layer.Group ({
 });
 
 map.addLayer(baseGroup);
+//Inisialisasi Layer Maps
 
+// create function addLayer
 var createLayer = function(title, layerName) {
     return new ol.layer.Tile({
         title: title,
@@ -50,7 +57,9 @@ var createLayer = function(title, layerName) {
         })
     });
 };
+// create function addLayer
 
+// Inisialisasi Layer Polygon
 var polygonGroup = new ol.layer.Group({
     title: 'Polygon',
     layers: [
@@ -84,7 +93,9 @@ var polygonGroup = new ol.layer.Group({
 });
 
 map.addLayer(polygonGroup);
+// Inisialisasi Layer Polygon
 
+// Inisialisasi Layer Polyline
 var polylineGroup = new ol.layer.Group({
     title: 'Polyline',
     layers: [
@@ -96,9 +107,11 @@ var polylineGroup = new ol.layer.Group({
 });
 
 map.addLayer(polylineGroup);
+// Inisialisasi Layer Polyline
 
+// Inisialisasi Layer Point
 var pointGroup = new ol.layer.Group({
-    title: 'Polyline',
+    title: 'Point',
     layers: [
         createLayer('Point Balai Pengajian', 'balaipengajianpoint'),
         createLayer('Point Bengkel', 'bengkelpoint'),
@@ -128,7 +141,9 @@ var pointGroup = new ol.layer.Group({
 });
 
 map.addLayer(pointGroup);
+// Inisialisasi Layer Point
 
+// Button Switcher Layer
 var layerSwitcher = new ol.control.LayerSwitcher({
     activationMode: 'click',
     startActive: false,
@@ -136,7 +151,9 @@ var layerSwitcher = new ol.control.LayerSwitcher({
 });
 
 map.addControl(layerSwitcher);
+// Button Switcher Layer
 
+// Button Popup
 var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
@@ -150,13 +167,17 @@ var popup = new ol.Overlay({
 });
 
 map.addOverlay(popup);
+// Button Popup
 
+// Button Closer Popup
 closer.onclick = function () {
     popup.setPosition(undefined);
     closer.blur();
     return false;
 };
+// Button Closer Popup
 
+// Function Show Popup
 function handlePopupLayer(layerName, featureInfoProperties, extraProperties = {}) {
     map.on('singleclick', function (evt) {
         content.innerHTML = '';
@@ -171,7 +192,20 @@ function handlePopupLayer(layerName, featureInfoProperties, extraProperties = {}
             $.getJSON(url, function (data) {
                 var feature = data.features[0];
                 var props = feature.properties;
-                var popupContent = Object.entries(extraProperties).map(([key, label]) => `<h3> ${label} : </h3> <p>${props[key]}</p> <br>`).join(' ');
+                var nilaiDenganSpasi = layerName.replace(/_/g, ' ');
+
+                // Memulai popup dengan tag dan struktur awal
+                var popupContent = `<h4 class="text-primary mb-3">${nilaiDenganSpasi}</h4>` +
+                                   '<div class="container"><table class="table table-striped ol-popup-table"' +
+                                   '<thead><tr><th>Properties</th><th>Value</th></tr></thead>';
+
+                // Menambahkan data dari extraProperties ke dalam popupContent
+                popupContent += Object.entries(extraProperties).map(([key, label]) => `<tr><td style="white-space: nowrap;">${label}</td><td style="white-space: nowrap;">${props[key]}</td></tr>`).join(' ');
+
+                // Menutup struktur popup
+                popupContent += '</table></div>';
+
+                // Menetapkan konten popup dan menampilkan posisi popup
                 content.innerHTML = popupContent;
                 popup.setPosition(evt.coordinate);
             });
@@ -180,9 +214,7 @@ function handlePopupLayer(layerName, featureInfoProperties, extraProperties = {}
         }
     });
 }
-
-// Call Action popup layer Rumah Sendiri
-handlePopupLayer('Rumah Sendiri', 'nama');
+// Function Show Popup
 
 // Call Action popup layer Balai Pengajian
 handlePopupLayer('Balai_Pengajian', 'name,teungku', { 
@@ -287,3 +319,6 @@ handlePopupLayer('Toko', 'nama,pemilik,jenis', {
 
 // Call Action popup layer Usaha
 handlePopupLayer('Usaha', 'name', { 'name': 'Nama Usaha' });
+
+// Call Action popup layer Rumah Sendiri
+handlePopupLayer('Rumah Sendiri', 'nama', { 'nama': 'Nama Bapak'});
