@@ -50,7 +50,7 @@ var createLayer = function(title, layerName) {
     return new ol.layer.Tile({
         title: title,
         source: new ol.source.TileWMS({
-            url: 'http://8.222.232.107:8080/geoserver/gisMnsManyang/wms',
+            url: 'http://publikalvinsyahri.my.id:8080/geoserver/gisMnsManyang/wms',
             params: {'LAYERS': 'gisMnsManyang:' + layerName, 'TILED': true},
             serverType: 'geoserver',
             visible: true

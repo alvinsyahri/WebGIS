@@ -2,17 +2,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Monospace', monospace;
 }
 
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    
 }
 
 #map {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 85vh;
 }
 
 .ol-popup-table {
@@ -31,7 +32,8 @@ body {
     min-width: 500px;
 }
 
-.ol-popup:after, .ol-popup::before {
+.ol-popup:after,
+.ol-popup::before {
     top: 100%;
     border: solid transparent;
     content: " ";
@@ -66,3 +68,289 @@ body {
     content: 'X';
 }
 
+.navbar {
+    background-color: #8DC63F;
+    /* Warna latar belakang */
+    padding: 1rem 0;
+    /* Padding atas dan bawah */
+}
+
+.navbar-brand {
+    color: #fff;
+    /* Warna teks logo atau judul */
+    font-size: 1.5rem;
+    /* Ukuran teks logo atau judul */
+    font-weight: bold;
+    /* Ketebalan teks logo atau judul */
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+    /* Warna ikon toggle pada perangkat kecil */
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    /* Warna teks menu */
+    margin-right: 1rem;
+    /* Jarak antar menu */
+    font-size: 1rem;
+    /* Ukuran teks menu */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #F8F9FA;
+    /* Warna teks menu saat dihover */
+}
+
+.col-md-7 {
+    padding-right: 30px;
+    /* Padding sebelah kanan */
+}
+
+h2 {
+    font-weight: bold;
+    color: #8DC63F;
+    /* Warna teks judul */
+    margin-bottom: 20px;
+    /* Jarak bawah judul */
+}
+
+.container p {
+    color: #333;
+    /* Warna teks paragraf */
+    font-size: 1.2rem;
+    /* Ukuran teks paragraf */
+    line-height: 1.6;
+    /* Ketinggian baris */
+}
+
+/* Gaya untuk kolom sebelah kanan */
+.col-md-5 {
+    text-align: center;
+    /* Teks rata tengah */
+}
+
+.img-fluid {
+    max-width: 100%;
+    /* Gambar responsif */
+    border-radius: 8px;
+    /* Sudut bulat pada gambar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Efek bayangan gambar */
+}
+
+.container {
+    background-color: #f8f9fa;
+    /* Warna latar belakang container */
+    padding: 20px;
+    /* Padding */
+    border-radius: 8px;
+    /* Sudut bulat pada container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Efek bayangan container */
+}
+
+/* Gaya untuk timeline item */
+.row.no-gutters {
+    margin-bottom: 20px;
+    /* Jarak antar timeline item */
+}
+
+.col-sm {
+    padding: 0 15px;
+    /* Padding kiri dan kanan pada kolom */
+}
+
+/* Gaya untuk dot di tengah timeline */
+.flex-column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gaya untuk badge di dot */
+.badge {
+    width: 20px;
+    /* Lebar badge */
+    height: 20px;
+    /* Tinggi badge */
+}
+
+/* Gaya untuk card pada timeline item */
+.card {
+    border: none;
+    /* Menghilangkan border pada card */
+}
+
+/* Gaya untuk card title */
+.card-title {
+    color: #333;
+    /* Warna teks judul */
+}
+
+/* Gaya untuk text pada card */
+.card-body .text-muted {
+    font-size: 0.875rem;
+    /* Ukuran teks */
+}
+
+/* Gaya untuk card pada timeline item yang aktif */
+.border-success {
+    border-color: #28a745 !important;
+    /* Warna border untuk item aktif */
+}
+
+/* Gaya untuk card shadow */
+.shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Efek bayangan card */
+}
+
+.mx-5 {
+    margin-left: 5rem !important;
+    /* Margin kiri */
+    margin-right: 5rem !important;
+    /* Margin kanan */
+}
+
+/* Gaya untuk tabel */
+.custom-table {
+    width: 80%;
+    /* Lebar tabel 80% dari container */
+    margin-top: 20px;
+    /* Margin atas */
+    border-collapse: separate;
+    /* Menyisipkan ruang antara sel */
+    border-spacing: 10px;
+    /* Jarak antara sel */
+}
+
+/* Gaya untuk header tabel */
+.custom-table th {
+    background-color: #8DC63F;
+    /* Warna latar belakang header */
+    color: #555555;
+    /* Warna teks header */
+    text-align: center;
+    /* Rata tengah */
+    padding: 8px;
+    /* Padding */
+}
+
+/* Gaya untuk sel dalam tabel */
+.custom-table td {
+    text-align: center;
+    /* Rata tengah */
+    padding: 8px;
+    /* Padding */
+}
+
+/* Gaya untuk baris ganjil dalam tabel */
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+    /* Warna latar belakang baris ganjil */
+}
+
+.card1 {
+    border-color: #8DC63F;
+    /* Warna border card */
+    max-width: 18rem;
+    /* Lebar maksimum card */
+    margin: 1rem;
+    /* Jarak margin antara card */
+    text-align: center;
+    /* Rata tengah */
+    padding: 20px;
+    /* Padding card */
+}
+
+/* Gaya untuk header card dusun */
+.card-header1 {
+    background-color: #f8f9fa;
+    /* Warna latar belakang header card */
+    border-color: #8DC63F;
+    /* Warna border header card */
+    text-align: center;
+    /* Rata tengah */
+    font-weight: bold;
+    /* Tebal teks */
+}
+
+/* Gaya untuk body card dusun */
+.card-body1 {
+    text-align: center;
+    /* Rata tengah */
+}
+
+/* Gaya untuk judul card dusun */
+.card-title1 {
+    color: #8DC63F;
+    /* Warna teks judul card */
+}
+
+/* Gaya untuk teks pada card dusun */
+.card-text1 {
+    color: #555;
+    /* Warna teks card */
+}
+
+/* Gaya untuk container tabel */
+.table-container {
+    background-color: #f8f9fa;
+    /* Warna latar belakang container tabel */
+    border: 1px solid #ced4da;
+    /* Garis tepi container tabel */
+    border-radius: 8px;
+    /* Radius sudut container tabel */
+    padding: 20px;
+    /* Padding container tabel */
+    margin: 20px 0;
+    /* Jarak atas dan bawah container tabel */
+}
+
+/* Gaya untuk container kartu */
+.card-container {
+    background-color: #f8f9fa;
+    /* Warna latar belakang container kartu */
+    border: 1px solid #ced4da;
+    /* Garis tepi container kartu */
+    border-radius: 8px;
+    /* Radius sudut container kartu */
+    padding: 20px;
+    /* Padding container kartu */
+    margin: 20px 0;
+    /* Jarak atas dan bawah container kartu */
+}
+
+footer {
+    background-color: #343a40;
+    /* Warna latar belakang footer */
+    padding: 20px 0;
+    /* Padding atas dan bawah footer */
+    text-align: center;
+    /* Pusatkan teks footer */
+}
+
+footer p {
+    color: #fff;
+}
+
+.container-about {
+    max-width: 1200px;
+}
+
+.card-about {
+    border: none;
+    border-radius: 10px;
+}
+
+.card-body-about {
+    text-align: justify;
+}
+
+h2.card-title-about{
+    color: #8DC63F;
+}
